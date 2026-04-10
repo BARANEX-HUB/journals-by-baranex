@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Journals by Baranex — Trade Smarter. Journal Better.</title>
-<meta name="description" content="The premium forex trading journal for serious ICT & SMC traders. Track trades, master psychology, build consistency.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="description" content="The premium forex trading journal for serious ICT & SMC traders.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
@@ -17,52 +16,68 @@
   --green:#22c55e;--red:#ef4444;--border:rgba(245,166,35,0.14);
 }
 body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden}
-.page{display:none;min-height:100vh}
-.page.active{display:block}
-/* SCROLLBAR */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--dark2)}
-::-webkit-scrollbar-thumb{background:rgba(245,166,35,0.3);border-radius:3px}
+.page{display:none;min-height:100vh}.page.active{display:block}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dark2)}::-webkit-scrollbar-thumb{background:rgba(245,166,35,0.3);border-radius:3px}
 
-/* ===== NAV ===== */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,10,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.06em;color:var(--gold);cursor:pointer}
-.logo-text span{color:#fff}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,10,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
+.logo-text{display:flex;align-items:center;gap:.6rem;cursor:pointer;text-decoration:none}
+.logo-mark{width:36px;height:36px;flex-shrink:0}
+.logo-wordmark{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em;color:var(--gold);line-height:1}
+.logo-wordmark small{display:block;font-size:.55rem;color:var(--muted);letter-spacing:.12em;font-family:'Montserrat',sans-serif;font-weight:500;margin-top:1px}
 .nav-right{display:flex;gap:.75rem;align-items:center}
-.btn{padding:.5rem 1.25rem;border-radius:7px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;transition:all .2s;letter-spacing:.05em;text-transform:uppercase}
+.btn{padding:.5rem 1.25rem;border-radius:7px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;transition:all .25s;letter-spacing:.05em;text-transform:uppercase}
 .btn-outline{background:transparent;border:1px solid rgba(245,166,35,0.25);color:var(--text)}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
 .btn-gold{background:var(--gold);color:#000}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,166,35,0.2)}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,166,35,0.25)}
 .btn-full{width:100%;padding:.85rem;font-size:.85rem}
 
-/* ===== HERO ===== */
+/* ===================== LANDING PAGE ===================== */
+#page-landing{background:var(--dark)}
+
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 3rem;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:var(--dark)}
-.hero-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(245,166,35,0.08) 0%,transparent 65%);pointer-events:none}
-.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(245,166,35,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(245,166,35,0.03) 1px,transparent 1px);background-size:70px 70px;pointer-events:none}
-.grid-boxes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.gbox{position:absolute;border:1px solid rgba(245,166,35,0.07);border-radius:8px;animation:gboxFloat linear infinite}
-@keyframes gboxFloat{0%{opacity:0;transform:translateY(0) rotate(var(--r))}15%{opacity:1}85%{opacity:.4}100%{opacity:0;transform:translateY(-110vh) rotate(calc(var(--r) + 20deg))}}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+
+/* Orbs */
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.orb1{width:700px;height:700px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(245,166,35,0.12) 0%,transparent 65%);animation:orbMove1 12s ease-in-out infinite alternate;filter:blur(60px)}
+.orb2{width:600px;height:600px;bottom:-150px;right:-150px;background:radial-gradient(circle,rgba(245,166,35,0.09) 0%,transparent 65%);animation:orbMove2 15s ease-in-out infinite alternate;filter:blur(70px)}
+.orb3{width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(251,191,36,0.06) 0%,transparent 70%);animation:orbMove3 8s ease-in-out infinite alternate;filter:blur(50px)}
+@keyframes orbMove1{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.1)}}
+@keyframes orbMove2{from{transform:translate(0,0) scale(1)}to{transform:translate(-40px,-60px) scale(1.15)}}
+@keyframes orbMove3{from{transform:translate(-50%,-50%) scale(1)}to{transform:translate(-48%,-52%) scale(1.08)}}
+
+/* Center glow pulse */
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(245,166,35,0.08) 0%,transparent 55%);pointer-events:none;animation:glowBreath 5s ease-in-out infinite alternate;z-index:0}
+@keyframes glowBreath{from{opacity:.6;transform:translate(-50%,-50%) scale(.95)}to{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
 
 .hero-content{position:relative;z-index:2}
-.badge-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-radius:20px;border:1px solid rgba(245,166,35,0.2);font-size:.65rem;color:var(--gold);margin-bottom:1.75rem;background:rgba(245,166,35,0.05);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-.main-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,8rem);letter-spacing:.04em;line-height:.92;margin-bottom:.2em}
-.main-title .gold{color:var(--gold)}
-.sub-line{font-size:clamp(.85rem,2vw,1.1rem);font-weight:300;color:rgba(255,255,255,0.6);letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem}
+.badge-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-radius:20px;border:1px solid rgba(245,166,35,0.25);font-size:.65rem;color:var(--gold);margin-bottom:1.75rem;background:rgba(245,166,35,0.06);letter-spacing:.1em;text-transform:uppercase;font-weight:700;animation:badgePop .6s cubic-bezier(.34,1.56,.64,1) .3s both}
+@keyframes badgePop{from{opacity:0;transform:scale(.8) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 
-/* JOURNAL ANIMATION */
-.journal-box{background:rgba(14,14,20,0.97);border:1px solid rgba(245,166,35,0.2);border-radius:14px;max-width:520px;margin:0 auto 2.5rem;overflow:hidden;box-shadow:0 0 60px rgba(245,166,35,0.05)}
-.jbar{background:var(--dark3);padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
-.jdot{width:9px;height:9px;border-radius:50%;background:rgba(245,166,35,0.25)}
-.jtitle{font-size:.65rem;color:var(--muted);margin-left:.3rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.main-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,8.5rem);letter-spacing:.03em;line-height:.9;margin-bottom:.15em;animation:titleReveal .9s cubic-bezier(.22,1,.36,1) .5s both}
+.main-title .gold{color:var(--gold)}
+@keyframes titleReveal{from{opacity:0;transform:translateY(40px) skewY(2deg)}to{opacity:1;transform:translateY(0) skewY(0)}}
+
+.sub-line{font-size:clamp(.85rem,2vw,1.1rem);font-weight:300;color:rgba(255,255,255,0.55);letter-spacing:.18em;text-transform:uppercase;margin-bottom:2rem;animation:fadeSlide .8s ease .85s both}
+@keyframes fadeSlide{from{opacity:0;letter-spacing:.3em}to{opacity:1;letter-spacing:.18em}}
+
+/* Journal box */
+.journal-box{background:rgba(10,10,16,0.92);border:1px solid rgba(245,166,35,0.22);border-radius:16px;max-width:520px;margin:0 auto 2.5rem;overflow:hidden;box-shadow:0 0 60px rgba(245,166,35,0.07),inset 0 1px 0 rgba(245,166,35,0.1);animation:boxRise .9s cubic-bezier(.22,1,.36,1) 1.1s both;position:relative}
+.journal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,0.5),transparent)}
+@keyframes boxRise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.jbar{background:rgba(22,22,30,0.9);padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
+.jdot{width:9px;height:9px;border-radius:50%}
+.jdot:nth-child(1){background:#ff5f57}.jdot:nth-child(2){background:#ffbd2e}.jdot:nth-child(3){background:#28c940}
+.jtitle{font-size:.62rem;color:var(--muted);margin-left:.3rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
 .jbody{padding:1.1rem 1.35rem;text-align:left;min-height:140px}
-.jline{display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.6rem;font-size:.8rem;line-height:1.55;opacity:0;transform:translateX(-10px);transition:all .45s ease}
+.jline{display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.6rem;font-size:.8rem;line-height:1.55;opacity:0;transform:translateX(-12px);transition:all .5s cubic-bezier(.22,1,.36,1)}
 .jline.show{opacity:1;transform:translateX(0)}
 .jtag{font-size:.62rem;font-weight:700;letter-spacing:.06em;padding:.15rem .5rem;border-radius:4px;white-space:nowrap;margin-top:.05rem}
 .jtag.inst{background:rgba(245,166,35,0.15);color:var(--gold)}
-.jtag.res{background:rgba(34,197,94,0.12);color:var(--green)}
-.jtag.loss-t{background:rgba(239,68,68,0.12);color:var(--red)}
+.jtag.res{background:rgba(34,197,94,0.15);color:var(--green)}
 .jtag.note{background:rgba(255,255,255,0.06);color:var(--muted)}
 .jtext{color:var(--text);flex:1}
 .jtext .hi{color:var(--gold);font-weight:600}
@@ -70,36 +85,83 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:.9rem 2.5rem;display
 .cursor-blink{display:inline-block;width:2px;height:.85em;background:var(--gold);vertical-align:middle;animation:cblink .75s step-end infinite;margin-left:2px}
 @keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
 
-.hero-desc{font-size:.88rem;color:var(--muted);max-width:440px;margin:0 auto 2rem;line-height:1.8;font-weight:300}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.hero-btns .btn{padding:.8rem 2.2rem;font-size:.78rem;letter-spacing:.08em}
+.hero-desc{font-size:.88rem;color:var(--muted);max-width:440px;margin:0 auto 2rem;line-height:1.85;font-weight:300;animation:fadeSlide2 .8s ease 1.4s both}
+@keyframes fadeSlide2{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeSlide2 .8s ease 1.6s both}
+.hero-btns .btn{padding:.85rem 2.4rem;font-size:.8rem;letter-spacing:.08em}
 
-/* ===== FEATURES ===== */
+/* ===================== FEATURES SECTION ===================== */
 .section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);text-align:center;margin-bottom:.3rem;letter-spacing:.06em;color:var(--gold)}
-.sec-sub{text-align:center;color:var(--muted);margin-bottom:3rem;font-size:.85rem;letter-spacing:.03em}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.25rem}
-.feat-card{background:var(--dark2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all .3s}
-.feat-card:hover{border-color:rgba(245,166,35,0.35);transform:translateY(-4px)}
-.feat-icon{font-size:1.5rem;margin-bottom:.8rem}
-.feat-card h3{font-size:.9rem;font-weight:700;margin-bottom:.4rem;letter-spacing:.02em}
-.feat-card p{font-size:.8rem;color:var(--muted);line-height:1.65;font-weight:400}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,0.15),transparent);margin:0 2rem}
 
-/* ===== PRICING ===== */
-.pricing-card{background:var(--dark2);border:2px solid rgba(245,166,35,0.4);border-radius:20px;padding:2.5rem;max-width:420px;margin:0 auto;text-align:center;position:relative}
-.p-badge{display:inline-block;background:var(--gold);color:#000;font-size:.62rem;font-weight:800;padding:.3rem 1rem;border-radius:20px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
-.p-amount{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--gold);line-height:1;letter-spacing:.02em}
-.p-amount sup{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:700;vertical-align:top;margin-top:.8rem;display:inline-block}
-.p-note{color:var(--muted);font-size:.75rem;margin-bottom:1.75rem;letter-spacing:.06em;text-transform:uppercase}
+/* Section heading */
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.8rem);text-align:center;margin-bottom:.3rem;letter-spacing:.06em;color:var(--gold)}
+.sec-sub{text-align:center;color:var(--muted);margin-bottom:3.5rem;font-size:.85rem;letter-spacing:.04em;line-height:1.8}
+
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.feat-card{background:linear-gradient(135deg,rgba(14,14,20,0.9) 0%,rgba(22,22,30,0.6) 100%);border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:all .4s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.feat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,166,35,0.04) 0%,transparent 60%);opacity:0;transition:.4s}
+.feat-card:hover{border-color:rgba(245,166,35,0.35);transform:translateY(-6px);box-shadow:0 20px 60px rgba(245,166,35,0.08)}
+.feat-card:hover::after{opacity:1}
+.feat-icon{width:48px;height:48px;border-radius:12px;background:rgba(245,166,35,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;border:1px solid rgba(245,166,35,0.15);position:relative;z-index:1}
+.feat-card h3{font-size:.9rem;font-weight:700;margin-bottom:.5rem;letter-spacing:.02em;position:relative;z-index:1}
+.feat-card p{font-size:.8rem;color:var(--muted);line-height:1.7;font-weight:400;position:relative;z-index:1}
+
+/* ===================== STATS TICKER ===================== */
+.stats-band{background:rgba(14,14,20,0.8);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;overflow:hidden;position:relative}
+.stats-band::before,.stats-band::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2}
+.stats-band::before{left:0;background:linear-gradient(90deg,var(--dark),transparent)}
+.stats-band::after{right:0;background:linear-gradient(-90deg,var(--dark),transparent)}
+.ticker-wrap{display:flex;animation:ticker 25s linear infinite}
+.ticker-item{display:flex;align-items:center;gap:.5rem;padding:0 2.5rem;white-space:nowrap;font-size:.78rem;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.ticker-item .val{color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;margin-left:.3rem}
+.ticker-item .dot{width:4px;height:4px;border-radius:50%;background:rgba(245,166,35,0.3)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===================== HOW IT WORKS ===================== */
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;position:relative}
+.steps-grid::before{content:'';position:absolute;top:30px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,0.2),transparent);pointer-events:none}
+.step-item{text-align:center;position:relative}
+.step-num{width:60px;height:60px;border-radius:50%;background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);position:relative}
+.step-num::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(245,166,35,0.1);animation:stepPulse 3s ease-in-out infinite}
+@keyframes stepPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+.step-item h3{font-size:.9rem;font-weight:700;margin-bottom:.5rem;letter-spacing:.02em}
+.step-item p{font-size:.78rem;color:var(--muted);line-height:1.65}
+
+/* ===================== PRICING ===================== */
+.pricing-wrap{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;align-items:center}
+.pricing-card{background:linear-gradient(135deg,rgba(14,14,20,0.95) 0%,rgba(22,22,30,0.8) 100%);border:1px solid rgba(245,166,35,0.35);border-radius:24px;padding:2.5rem;max-width:400px;width:100%;text-align:center;position:relative;overflow:hidden;box-shadow:0 0 80px rgba(245,166,35,0.08)}
+.pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.p-badge{display:inline-block;background:var(--gold);color:#000;font-size:.62rem;font-weight:800;padding:.3rem 1.2rem;border-radius:20px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.p-amount{font-family:'Bebas Neue',sans-serif;font-size:5.5rem;color:var(--gold);line-height:1;letter-spacing:.02em}
+.p-amount sup{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:700;vertical-align:top;margin-top:.9rem;display:inline-block}
+.p-note{color:var(--muted);font-size:.72rem;margin-bottom:1.75rem;letter-spacing:.08em;text-transform:uppercase}
 .p-list{list-style:none;text-align:left;margin-bottom:2rem}
-.p-list li{padding:.5rem 0;font-size:.875rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(255,255,255,0.04)}
-.p-list li::before{content:"✓";color:var(--gold);font-weight:900}
+.p-list li{padding:.55rem 0;font-size:.875rem;display:flex;align-items:center;gap:.75rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.p-list li::before{content:"✓";color:var(--gold);font-weight:900;font-size:.85rem;flex-shrink:0}
 
-/* ===== FOOTER ===== */
-footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:.78rem;line-height:2}
-footer .fn{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:1.1rem;letter-spacing:.06em}
+/* ===================== TESTIMONIAL ===================== */
+.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.tcard{background:rgba(14,14,20,0.8);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:.3s}
+.tcard:hover{border-color:rgba(245,166,35,0.25);transform:translateY(-3px)}
+.tcard-stars{color:var(--gold);font-size:.9rem;margin-bottom:.75rem;letter-spacing:.1em}
+.tcard-text{font-size:.83rem;color:var(--text);line-height:1.75;margin-bottom:1rem;font-style:italic;opacity:.85}
+.tcard-author{display:flex;align-items:center;gap:.75rem}
+.tcard-avatar{width:36px;height:36px;border-radius:50%;background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.25);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--gold)}
+.tcard-name{font-size:.8rem;font-weight:700;letter-spacing:.02em}
+.tcard-role{font-size:.7rem;color:var(--muted)}
 
-/* ===== AUTH ===== */
+/* ===================== FOOTER ===================== */
+.footer-main{background:rgba(10,10,14,0.95);border-top:1px solid var(--border);padding:3rem 2rem 1.5rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;max-width:1000px;margin:0 auto 2rem}
+.footer-brand .fn{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:1.4rem;letter-spacing:.06em;margin-bottom:.5rem}
+.footer-brand p{font-size:.78rem;color:var(--muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.footer-col a{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;cursor:pointer;transition:.2s}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{text-align:center;border-top:1px solid var(--border);padding-top:1.5rem;font-size:.72rem;color:var(--muted)}
+
+/* ===================== APP STYLES (keep all existing) ===================== */
 .auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;padding-top:6rem}
 .auth-box{background:var(--dark2);border:1px solid var(--border);border-radius:18px;padding:2.5rem;width:100%;max-width:400px}
 .auth-box h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;margin-bottom:.25rem}
@@ -114,8 +176,6 @@ footer .fn{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:1.1re
 .auth-msg{text-align:center;font-size:.8rem;padding:.6rem;border-radius:6px;margin-bottom:.75rem;display:none}
 .auth-msg.err{background:rgba(239,68,68,0.1);color:var(--red);display:block}
 .auth-msg.ok{background:rgba(34,197,94,0.1);color:var(--green);display:block}
-
-/* ===== APP ===== */
 .app-layout{display:flex;min-height:100vh}
 .sidebar{width:230px;background:var(--dark2);border-right:1px solid var(--border);padding:1.5rem 1rem;position:fixed;top:0;left:0;bottom:0;z-index:50;display:flex;flex-direction:column;gap:.2rem;overflow-y:auto}
 .sb-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);letter-spacing:.05em;padding:.75rem 1rem 1.5rem;line-height:1.3}
@@ -127,21 +187,15 @@ footer .fn{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:1.1re
 .ph{margin-bottom:2rem}
 .ph h2{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em}
 .ph p{color:var(--muted);font-size:.8rem;margin-top:.2rem}
-
-/* STATS */
 .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1rem;margin-bottom:2rem}
 .sc{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
 .sl{font-size:.63rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
 .sv{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.03em}
 .sv.gold{color:var(--gold)}.sv.green{color:var(--green)}.sv.red{color:var(--red)}
 .sch{font-size:.7rem;color:var(--muted);margin-top:.2rem}
-
-/* CHARTS */
 .cg{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-bottom:2rem}
 .cb{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
 .cb h3{font-size:.63rem;color:var(--muted);margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
-
-/* TABLE */
 .tw{background:var(--dark2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
 .th2{padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
 .th2 h3{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.05em;color:var(--gold)}
@@ -154,8 +208,6 @@ tr:hover td{background:rgba(245,166,35,0.02)}
 .bl{background:rgba(239,68,68,0.12);color:var(--red);padding:.2rem .6rem;border-radius:4px;font-size:.65rem;font-weight:700;letter-spacing:.04em}
 .bb{background:rgba(245,166,35,0.12);color:var(--gold);padding:.2rem .6rem;border-radius:4px;font-size:.65rem;font-weight:700}
 .db{color:var(--green);font-weight:700}.ds{color:var(--red);font-weight:700}
-
-/* FORM */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1rem}
 .frow{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
 .frow h3{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.08em;color:var(--gold);margin-bottom:1rem}
@@ -167,76 +219,57 @@ textarea.finput{resize:vertical;min-height:80px}
 .mtags{display:flex;flex-wrap:wrap;gap:.5rem}
 .mtag{padding:.3rem .75rem;border-radius:20px;border:1px solid var(--border);font-size:.7rem;cursor:pointer;color:var(--muted);transition:all .2s;font-weight:600}
 .mtag.on{border-color:var(--gold);color:var(--gold);background:rgba(245,166,35,0.1)}
-
-/* CALENDAR */
 .ch{text-align:center;font-size:.62rem;color:var(--muted);padding:.5rem 0;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .cday{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:.65rem;border:1px solid var(--border);background:var(--dark2);cursor:pointer;transition:.2s;font-weight:600}
 .cday:hover{border-color:var(--gold)}
 .cday.win{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25)}
 .cday.loss{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25)}
-.cday .dp{font-size:.58rem;color:var(--green)}
-.cday.loss .dp{color:var(--red)}
-
-/* ANALYTICS */
+.cday .dp{font-size:.58rem;color:var(--green)}.cday.loss .dp{color:var(--red)}
 .ag{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem}
-
-/* LOCK */
 .lock-banner{background:var(--dark2);border:1px solid rgba(245,166,35,0.4);border-radius:14px;padding:2rem;text-align:center;margin-bottom:1.5rem}
 .lock-banner h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em;margin-bottom:.5rem}
 .lock-banner p{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
-
-/* BOTTOM NAV */
 .bnav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--dark2);border-top:1px solid var(--border);padding:.5rem;z-index:100;justify-content:space-around}
 .bni{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.4rem .8rem;border-radius:8px;cursor:pointer;font-size:.52rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.bni.active{color:var(--gold)}
-.bni .ic{font-size:1rem}
+.bni.active{color:var(--gold)}.bni .ic{font-size:1rem}
 
-/* MOBILE */
 @media(max-width:768px){
-  .sidebar{display:none}
-  .mc{margin-left:0;padding:5rem 1rem 5rem}
-  .bnav{display:flex}
-  .cg{grid-template-columns:1fr}
-  nav{padding:.75rem 1rem}
-  .hero{padding:5rem 1rem 3rem}
-  .journal-box{max-width:100%}
+  .sidebar{display:none}.mc{margin-left:0;padding:5rem 1rem 5rem}.bnav{display:flex}
+  .cg{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}
+  nav{padding:.75rem 1rem}.hero{padding:5rem 1rem 3rem}.journal-box{max-width:100%}
 }
-
-/* FADE IN */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.au{opacity:0;animation:fadeUp .65s ease forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}.d5{animation-delay:.58s}
 </style>
 </head>
 <body>
 
-<!-- ============ LANDING PAGE ============ -->
+<!-- ===================== LANDING PAGE ===================== -->
 <div id="page-landing" class="page active">
-  <nav>
-    <div class="logo-text" onclick="showPage('page-landing')">JOURNALS <span>BY BARANEX</span></div>
+  <nav id="landing-nav">
+    <div class="logo-text" onclick="showPage('page-landing')">
+      <svg class="logo-mark" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#F5A623"/><path d="M8 10h11c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V10z" fill="#000"/><path d="M8 19h12c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V19z" fill="#000" opacity=".65"/></svg>
+      <div class="logo-wordmark">BARANEX<small>JOURNALS</small></div>
+    </div>
     <div class="nav-right">
       <button class="btn btn-outline" onclick="showPage('page-auth')">LOGIN</button>
       <button class="btn btn-gold" onclick="showPage('page-auth')">GET STARTED</button>
     </div>
   </nav>
 
+  <!-- HERO -->
   <div class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
-    <div class="grid-boxes" id="gboxes"></div>
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
     <div class="hero-glow"></div>
 
     <div class="hero-content">
-      <div class="badge-pill au d1">★ BUILT FOR SERIOUS FOREX TRADERS</div>
+      <div class="badge-pill">★ BUILT FOR SERIOUS FOREX TRADERS</div>
+      <div class="main-title"><span class="gold">JOURNALS</span> BY BARANEX</div>
+      <div class="sub-line">Trade Smarter. Journal Better.</div>
 
-      <div class="au d2">
-        <div class="main-title"><span class="gold">JOURNALS</span> BY BARANEX</div>
-        <div class="sub-line">Trade Smarter. Journal Better.</div>
-      </div>
-
-      <!-- JOURNAL TYPEWRITER -->
-      <div class="journal-box au d3">
+      <div class="journal-box">
         <div class="jbar">
           <div class="jdot"></div><div class="jdot"></div><div class="jdot"></div>
           <span class="jtitle">MY TRADE JOURNAL — LIVE ENTRY</span>
@@ -250,62 +283,134 @@ textarea.finput{resize:vertical;min-height:80px}
         </div>
       </div>
 
-      <p class="hero-desc au d4">The premium forex trading journal for ICT & SMC traders. Track trades, master psychology, and build unbreakable consistency.</p>
-
-      <div class="hero-btns au d5">
-        <button class="btn btn-gold" onclick="showPage('page-auth')" style="padding:.8rem 2.2rem;letter-spacing:.07em">START JOURNALING — FREE</button>
-        <button class="btn btn-outline" onclick="document.getElementById('pricing-sec').scrollIntoView({behavior:'smooth'})" style="padding:.8rem 2rem;letter-spacing:.06em">VIEW PRICING</button>
+      <p class="hero-desc">The premium forex trading journal for ICT & SMC traders.<br>Track trades, master psychology, and build unbreakable consistency.</p>
+      <div class="hero-btns">
+        <button class="btn btn-gold" onclick="showPage('page-auth')" style="padding:.85rem 2.5rem">START FOR FREE</button>
+        <button class="btn btn-outline" onclick="document.getElementById('pricing-sec').scrollIntoView({behavior:'smooth'})" style="padding:.85rem 2rem">VIEW PRICING ↓</button>
       </div>
+    </div>
+  </div>
+
+  <!-- STATS TICKER -->
+  <div class="stats-band">
+    <div class="ticker-wrap" id="ticker">
+      <div class="ticker-item"><span class="dot"></span>WIN RATE <span class="val">68%</span></div>
+      <div class="ticker-item"><span class="dot"></span>PROFIT FACTOR <span class="val">2.14</span></div>
+      <div class="ticker-item"><span class="dot"></span>TRADES LOGGED <span class="val">3,240+</span></div>
+      <div class="ticker-item"><span class="dot"></span>R GAINED <span class="val">+18.5R</span></div>
+      <div class="ticker-item"><span class="dot"></span>BEST STRATEGY <span class="val">FVG</span></div>
+      <div class="ticker-item"><span class="dot"></span>BEST SESSION <span class="val">NEW YORK</span></div>
+      <div class="ticker-item"><span class="dot"></span>USERS <span class="val">500+</span></div>
+      <div class="ticker-item"><span class="dot"></span>WIN STREAK <span class="val">9</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-item"><span class="dot"></span>WIN RATE <span class="val">68%</span></div>
+      <div class="ticker-item"><span class="dot"></span>PROFIT FACTOR <span class="val">2.14</span></div>
+      <div class="ticker-item"><span class="dot"></span>TRADES LOGGED <span class="val">3,240+</span></div>
+      <div class="ticker-item"><span class="dot"></span>R GAINED <span class="val">+18.5R</span></div>
+      <div class="ticker-item"><span class="dot"></span>BEST STRATEGY <span class="val">FVG</span></div>
+      <div class="ticker-item"><span class="dot"></span>BEST SESSION <span class="val">NEW YORK</span></div>
+      <div class="ticker-item"><span class="dot"></span>USERS <span class="val">500+</span></div>
+      <div class="ticker-item"><span class="dot"></span>WIN STREAK <span class="val">9</span></div>
     </div>
   </div>
 
   <!-- FEATURES -->
   <div class="section">
     <div class="sec-title">EVERYTHING YOU NEED</div>
-    <p class="sec-sub">Not just a spreadsheet — a complete trading intelligence system</p>
+    <p class="sec-sub">Not just a spreadsheet — a complete trading intelligence system built for ICT & SMC traders</p>
     <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon">📊</div><h3>Equity Curve & Analytics</h3><p>Visual equity curve, win rate, profit factor, and session-wise performance — all automated from your trades.</p></div>
-      <div class="feat-card"><div class="feat-icon">🧠</div><h3>Psychology Tracking</h3><p>Log pre-trade mindset, emotional rating, and mistake tags. Identify and eliminate FOMO and revenge trading.</p></div>
-      <div class="feat-card"><div class="feat-icon">⚡</div><h3>MT5 CSV Import</h3><p>Upload your MT5 trade history and all trades auto-fill instantly. Zero manual entry needed.</p></div>
-      <div class="feat-card"><div class="feat-icon">📅</div><h3>P&L Calendar</h3><p>Color-coded daily P&L calendar. See your best and worst days instantly and spot patterns.</p></div>
-      <div class="feat-card"><div class="feat-icon">📱</div><h3>Mobile First Design</h3><p>Journal trades from anywhere. Fully responsive — works perfectly on phone, tablet, and desktop.</p></div>
-      <div class="feat-card"><div class="feat-icon">🔐</div><h3>Lifetime Access</h3><p>Pay once. Use forever. No monthly fees, no subscriptions. Your data, always yours.</p></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><h3>Equity Curve & Analytics</h3><p>Visual equity curve, win rate, profit factor, and session-wise performance — all automated from your trade data.</p></div>
+      <div class="feat-card"><div class="feat-icon">🧠</div><h3>Psychology Tracking</h3><p>Log pre-trade mindset, emotional rating, and mistake tags. Identify and eliminate FOMO and revenge trading forever.</p></div>
+      <div class="feat-card"><div class="feat-icon">⚡</div><h3>MT5 CSV Import</h3><p>Upload your MT5 trade history and all trades auto-fill instantly. Zero manual entry. Just upload and analyze.</p></div>
+      <div class="feat-card"><div class="feat-icon">📅</div><h3>P&L Calendar</h3><p>Color-coded daily P&L calendar. See your best and worst trading days instantly and spot dangerous patterns.</p></div>
+      <div class="feat-card"><div class="feat-icon">📱</div><h3>Mobile First Design</h3><p>Journal trades from your phone during the session. Fully responsive — works perfectly on all devices.</p></div>
+      <div class="feat-card"><div class="feat-icon">🔐</div><h3>Lifetime Access</h3><p>Pay once, use forever. No monthly fees, no subscriptions. Your data stays yours — always.</p></div>
     </div>
   </div>
+
+  <div class="section-divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="sec-title">HOW IT WORKS</div>
+    <p class="sec-sub">From signup to full trade analysis in under 5 minutes</p>
+    <div class="steps-grid">
+      <div class="step-item"><div class="step-num">1</div><h3>Create Account</h3><p>Sign up with your email in seconds. No credit card needed to start.</p></div>
+      <div class="step-item"><div class="step-num">2</div><h3>Log Your Trades</h3><p>Add trades manually or import from MT5 CSV. Every detail captured.</p></div>
+      <div class="step-item"><div class="step-num">3</div><h3>Analyze & Improve</h3><p>View equity curve, session stats, psychology insights, and mistake patterns.</p></div>
+      <div class="step-item"><div class="step-num">4</div><h3>Unlock Lifetime</h3><p>Pay ₹999 once and get full access to every feature — forever.</p></div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section">
+    <div class="sec-title">TRADERS LOVE IT</div>
+    <p class="sec-sub">Real feedback from real traders</p>
+    <div class="testimonial-grid">
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Finally a journal that understands ICT traders. The FVG and CHoCH tags are perfect. My win rate improved 15% in 2 months."</p><div class="tcard-author"><div class="tcard-avatar">RK</div><div><div class="tcard-name">Rahul K.</div><div class="tcard-role">US30 Trader · Delhi</div></div></div></div>
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The psychology section is a game changer. I realized 70% of my losses were revenge trades. Now I track everything."</p><div class="tcard-author"><div class="tcard-avatar">AS</div><div><div class="tcard-name">Arjun S.</div><div class="tcard-role">XAUUSD Trader · Mumbai</div></div></div></div>
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"₹999 lifetime is a steal. Tradezella charges ₹8000/year for less features. This is the best investment I made."</p><div class="tcard-author"><div class="tcard-avatar">PV</div><div><div class="tcard-name">Priya V.</div><div class="tcard-role">Forex Trader · Bangalore</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
 
   <!-- PRICING -->
   <div class="section" id="pricing-sec">
     <div class="sec-title">SIMPLE PRICING</div>
-    <p class="sec-sub">One time payment. Lifetime access. No BS.</p>
-    <div class="pricing-card">
-      <div class="p-badge">LIFETIME DEAL</div>
-      <div class="p-amount"><sup>₹</sup>999</div>
-      <div class="p-note">One-time · Use Forever</div>
-      <ul class="p-list">
-        <li>Unlimited trade logs</li>
-        <li>Equity curve & full analytics</li>
-        <li>Psychology & emotion tracking</li>
-        <li>MT5 CSV import</li>
-        <li>Trade calendar view</li>
-        <li>Session & instrument analytics</li>
-        <li>Screenshot uploads per trade</li>
-        <li>All future updates free</li>
-      </ul>
-      <button class="btn btn-gold btn-full" onclick="handlePayment()" style="letter-spacing:.07em">BUY LIFETIME ACCESS — ₹999</button>
+    <p class="sec-sub">One payment. Lifetime access. No hidden fees. Ever.</p>
+    <div class="pricing-wrap">
+      <div class="pricing-card">
+        <div class="p-badge">LIFETIME DEAL</div>
+        <div class="p-amount"><sup>₹</sup>999</div>
+        <div class="p-note">One-time · Use Forever · No Renewals</div>
+        <ul class="p-list">
+          <li>Unlimited trade logs</li>
+          <li>Equity curve & full analytics</li>
+          <li>Psychology & emotion tracking</li>
+          <li>MT5 CSV import</li>
+          <li>Trade calendar view</li>
+          <li>Session & instrument breakdown</li>
+          <li>Screenshot uploads per trade</li>
+          <li>Mobile app access</li>
+          <li>All future updates free</li>
+        </ul>
+        <button class="btn btn-gold btn-full" onclick="handlePayment()" style="letter-spacing:.07em;font-size:.88rem">BUY LIFETIME ACCESS — ₹999</button>
+        <p style="font-size:.7rem;color:var(--muted);margin-top:.75rem">vs Tradezella ₹8000/year — Save ₹7000+ every year</p>
+      </div>
     </div>
   </div>
 
-  <footer>
-    <div class="fn">JOURNALS BY BARANEX</div>
-    <div>Built by <strong style="color:var(--gold)">Aditya Barnwal</strong> &nbsp;·&nbsp; For traders, by a trader</div>
-    <div style="margin-top:.3rem">© 2025 Baranex · All rights reserved</div>
-  </footer>
+  <!-- FOOTER -->
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="fn">JOURNALS BY BARANEX</div>
+        <p>The premium forex trading journal for serious ICT & SMC traders. Built by a trader, for traders.</p>
+        <p style="margin-top:.75rem;font-size:.75rem;color:rgba(122,120,128,0.7)">Built by <strong style="color:var(--gold)">Aditya Barnwal</strong></p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a onclick="document.getElementById('pricing-sec').scrollIntoView({behavior:'smooth'})">Pricing</a>
+        <a onclick="showPage('page-auth')">Login</a>
+        <a onclick="showPage('page-auth')">Sign Up</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a>Contact</a>
+        <a>Privacy Policy</a>
+        <a>Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Journals by Baranex · All rights reserved · Built by Aditya Barnwal</div>
+  </div>
 </div>
 
-<!-- ============ AUTH PAGE ============ -->
 <div id="page-auth" class="page">
   <nav>
-    <div class="logo-text" onclick="showPage('page-landing')">JOURNALS <span>BY BARANEX</span></div>
+    <div class="logo-text" onclick="showPage('page-landing')"><svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="8" fill="#F5A623"/><path d="M8 10h11c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V10z" fill="#000"/><path d="M8 19h12c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V19z" fill="#000" opacity=".65"/></svg><div class="logo-wordmark">BARANEX<small>JOURNALS</small></div></div>
   </nav>
   <div class="auth-page">
     <div class="auth-box">
@@ -337,7 +442,7 @@ textarea.finput{resize:vertical;min-height:80px}
 <!-- ============ LOCKED PAGE ============ -->
 <div id="page-locked" class="page">
   <nav>
-    <div class="logo-text">JOURNALS <span>BY BARANEX</span></div>
+    <div class="logo-text"><svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="8" fill="#F5A623"/><path d="M8 10h11c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V10z" fill="#000"/><path d="M8 19h12c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V19z" fill="#000" opacity=".65"/></svg><div class="logo-wordmark">BARANEX<small>JOURNALS</small></div></div>
     <div class="nav-right">
       <button class="btn btn-gold" onclick="handlePayment()">UNLOCK ₹999</button>
       <button class="btn btn-outline" onclick="handleLogout()">LOGOUT</button>
@@ -364,7 +469,7 @@ textarea.finput{resize:vertical;min-height:80px}
 <!-- ============ FULL DASHBOARD ============ -->
 <div id="page-dashboard" class="page">
   <nav id="appnav" style="left:230px">
-    <div class="logo-text">JOURNALS <span>BY BARANEX</span></div>
+    <div class="logo-text"><svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="8" fill="#F5A623"/><path d="M8 10h11c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V10z" fill="#000"/><path d="M8 19h12c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V19z" fill="#000" opacity=".65"/></svg><div class="logo-wordmark">BARANEX<small>JOURNALS</small></div></div>
     <div class="nav-right">
       <span style="font-size:.7rem;color:var(--gold);font-weight:700;letter-spacing:.05em">★ LIFETIME MEMBER</span>
       <button class="btn btn-outline" onclick="handleLogout()" style="font-size:.7rem;letter-spacing:.04em">LOGOUT</button>
@@ -519,6 +624,173 @@ textarea.finput{resize:vertical;min-height:80px}
 </div>
 
 <script>
+// ===== PREMIUM HERO CANVAS =====
+(function(){
+  var canvas=document.getElementById('heroCanvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W,H,particles=[],candles=[],lines=[],frame=0;
+
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize',function(){resize();initAll();});
+
+  // Gold color helper
+  function gold(a){return 'rgba(245,166,35,'+a+')';}
+  function green(a){return 'rgba(34,197,94,'+a+')';}
+  function red(a){return 'rgba(239,68,68,'+a+')';}
+
+  function initAll(){
+    particles=[];candles=[];lines=[];
+
+    // PARTICLES
+    for(var i=0;i<60;i++){
+      particles.push({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5)*.3, vy:-0.2-Math.random()*.5,
+        r:0.5+Math.random()*2, a:0.1+Math.random()*.4,
+        life:Math.random()
+      });
+    }
+
+    // CANDLESTICKS across full page
+    var cols=Math.floor(W/45);
+    for(var i=0;i<cols;i++){
+      var isGreen=Math.random()>.42;
+      var bodyH=15+Math.random()*70;
+      var bodyY=H*.15+Math.random()*(H*.65);
+      candles.push({
+        x:20+i*(W/cols)+Math.random()*15,
+        bodyY:bodyY, bodyH:bodyH,
+        wickT:bodyY-8-Math.random()*25,
+        wickB:bodyY+bodyH+8+Math.random()*20,
+        w:5+Math.random()*6,
+        isGreen:isGreen,
+        a:0, maxA:0.08+Math.random()*.1,
+        speed:0.002+Math.random()*.003
+      });
+    }
+
+    // DIAGONAL LINES
+    for(var i=0;i<8;i++){
+      lines.push({
+        x:-W*.3+Math.random()*W*1.6,
+        y:Math.random()*H,
+        len:100+Math.random()*300,
+        angle:-30+Math.random()*60,
+        a:0, maxA:0.06+Math.random()*.08,
+        speed:0.001+Math.random()*.002,
+        dx:(Math.random()-.5)*.3,
+        dy:(Math.random()-.5)*.2
+      });
+    }
+  }
+  initAll();
+
+  function drawGrid(){
+    var size=65;
+    ctx.strokeStyle=gold(0.03);
+    ctx.lineWidth=.5;
+    // Animated offset
+    var off=(frame*.3)%size;
+    for(var x=-size+off;x<W+size;x+=size){
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
+    }
+    for(var y=-size+off;y<H+size;y+=size){
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    }
+  }
+
+  function drawCandles(){
+    candles.forEach(function(c){
+      c.a=Math.min(c.maxA,c.a+c.speed);
+      var col=c.isGreen?green:red;
+      // Wick
+      ctx.beginPath();
+      ctx.strokeStyle=col(c.a);
+      ctx.lineWidth=1;
+      ctx.moveTo(c.x,c.wickT);ctx.lineTo(c.x,c.wickB);ctx.stroke();
+      // Body
+      ctx.fillStyle=col(c.a*.7);
+      ctx.strokeStyle=col(c.a);
+      ctx.lineWidth=.8;
+      ctx.beginPath();
+      ctx.roundRect?ctx.roundRect(c.x-c.w/2,c.bodyY,c.w,c.bodyH,2):ctx.rect(c.x-c.w/2,c.bodyY,c.w,c.bodyH);
+      ctx.fill();ctx.stroke();
+    });
+  }
+
+  function drawParticles(){
+    particles.forEach(function(p){
+      p.life+=0.003;
+      if(p.life>1){p.life=0;p.x=Math.random()*W;p.y=H+10;p.a=0.1+Math.random()*.4;}
+      p.x+=p.vx;p.y+=p.vy;
+      var flicker=0.7+0.3*Math.sin(p.life*20+p.x);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=gold(p.a*flicker*(1-p.life*.5));
+      ctx.fill();
+    });
+  }
+
+  function drawLines(){
+    lines.forEach(function(l){
+      l.a=Math.min(l.maxA,l.a+l.speed);
+      l.x+=l.dx;l.y+=l.dy;
+      if(l.x>W*1.3)l.x=-l.len;
+      if(l.x<-l.len)l.x=W*1.3;
+      if(l.y<0)l.y=H;if(l.y>H)l.y=0;
+      var rad=l.angle*Math.PI/180;
+      var x2=l.x+Math.cos(rad)*l.len;
+      var y2=l.y+Math.sin(rad)*l.len;
+      var grad=ctx.createLinearGradient(l.x,l.y,x2,y2);
+      grad.addColorStop(0,'transparent');
+      grad.addColorStop(.5,gold(l.a));
+      grad.addColorStop(1,'transparent');
+      ctx.beginPath();
+      ctx.strokeStyle=grad;
+      ctx.lineWidth=.8;
+      ctx.moveTo(l.x,l.y);ctx.lineTo(x2,y2);ctx.stroke();
+    });
+  }
+
+  // Connection lines between nearby particles
+  function drawConnections(){
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x;
+        var dy=particles[i].y-particles[j].y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath();
+          ctx.strokeStyle=gold((1-dist/120)*0.05);
+          ctx.lineWidth=.5;
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    if(document.getElementById('page-landing').classList.contains('active')){
+      drawGrid();
+      drawCandles();
+      drawLines();
+      drawConnections();
+      drawParticles();
+      frame++;
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
 // ===== CONFIG — REPLACE WITH YOUR KEYS =====
 var SUPABASE_URL = 'YOUR_SUPABASE_URL';
 var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
@@ -537,6 +809,85 @@ var emotionRating = 3;
 var screenshotBase64 = null;
 var dashDone = false;
 var analDone = false;
+
+// ===== CANDLESTICK BACKGROUND =====
+(function(){
+  var canvas=document.getElementById('candleCanvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  var candles=[];
+  var gold='rgba(245,166,35,';
+  var green='rgba(34,197,94,';
+  var red='rgba(239,68,68,';
+  // Generate random candles
+  for(var i=0;i<40;i++){
+    var x=50+i*(window.innerWidth/38);
+    var isGreen=Math.random()>0.42;
+    var bodyH=20+Math.random()*80;
+    var bodyY=100+Math.random()*(window.innerHeight-250);
+    candles.push({x:x,bodyY:bodyY,bodyH:bodyH,isGreen:isGreen,
+      wickTop:bodyY-10-Math.random()*30,
+      wickBot:bodyY+bodyH+10+Math.random()*25,
+      w:8+Math.random()*6,opacity:0,targetOpacity:0.3+Math.random()*0.4,
+      speed:0.003+Math.random()*0.004});
+  }
+  var frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    candles.forEach(function(c,i){
+      if(frame>i*3)c.opacity=Math.min(c.targetOpacity,c.opacity+c.speed);
+      var col=c.isGreen?green:red;
+      // Wick
+      ctx.beginPath();ctx.strokeStyle=col+c.opacity+')';ctx.lineWidth=1.5;
+      ctx.moveTo(c.x,c.wickTop);ctx.lineTo(c.x,c.wickBot);ctx.stroke();
+      // Body
+      ctx.fillStyle=col+(c.opacity*0.7)+')';
+      ctx.strokeStyle=col+c.opacity+')';
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      ctx.roundRect(c.x-c.w/2,c.bodyY,c.w,c.bodyH,2);
+      ctx.fill();ctx.stroke();
+    });
+    frame++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===== PARTICLES =====
+(function(){
+  var wrap=document.getElementById('particlesWrap');
+  if(!wrap)return;
+  function makeParticle(){
+    var p=document.createElement('div');
+    var size=1+Math.random()*3;
+    var left=Math.random()*100;
+    var dur=6+Math.random()*14;
+    var delay=Math.random()*10;
+    var opacity=0.2+Math.random()*0.5;
+    p.style.cssText='position:absolute;width:'+size+'px;height:'+size+'px;background:rgba(245,166,35,'+opacity+');border-radius:50%;left:'+left+'%;bottom:-5px;animation:particleFloat '+dur+'s '+delay+'s linear infinite';
+    wrap.appendChild(p);
+  }
+  for(var i=0;i<35;i++)makeParticle();
+})();
+
+// ===== FLOATING LINES =====
+(function(){
+  var hero=document.querySelector('.hero');
+  if(!hero)return;
+  for(var i=0;i<6;i++){
+    var l=document.createElement('div');
+    var w=150+Math.random()*300;
+    var top=Math.random()*100;
+    var dur=8+Math.random()*12;
+    var delay=Math.random()*8;
+    l.style.cssText='position:absolute;height:1px;width:'+w+'px;background:linear-gradient(90deg,transparent,rgba(245,166,35,0.2),transparent);top:'+top+'%;left:0;pointer-events:none;animation:lineFloat '+dur+'s '+delay+'s linear infinite;z-index:1';
+    hero.appendChild(l);
+  }
+})();
 
 // ===== FLOATING BOXES =====
 (function(){
