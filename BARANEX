@@ -792,10 +792,10 @@ textarea.finput{resize:vertical;min-height:80px}
 })();
 
 // ===== CONFIG — REPLACE WITH YOUR KEYS =====
-var SUPABASE_URL = 'YOUR_SUPABASE_URL';
-var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-var RAZORPAY_LINK = 'YOUR_RAZORPAY_PAYMENT_LINK';
-var RAZORPAY_KEY_ID = 'YOUR_RAZORPAY_KEY_ID';
+var SUPABASE_URL = 'https://jjgokriupqtdstdgulzz.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqZ29rcml1cHF0ZHN0ZGd1bHp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NjkwNjQsImV4cCI6MjA5MTI0NTA2NH0.R-kfXkJHLuuW5nseNCOKYGldNr3gig1jIGqajJh-01U';
+var RAZORPAY_LINK = 'https://rzp.io/rzp/xWLpmweb';
+var RAZORPAY_KEY_ID = 'rzp_test_SbtTzXXiwcGvqC';
 // ===========================================
 
 var supabase = null;
